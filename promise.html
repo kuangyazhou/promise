@@ -7,6 +7,7 @@
                 setTimeout(function() {
                     console.log("done");
                     resolve("any");
+                    reject("fuck the king");
                 }, 2000);
             });
             return p;
@@ -14,6 +15,8 @@
         runAsync();
         runAsync().then(function(e){
             console.log(e);
-        })
+        }).catch(function(err){
+            console.log(err);
+        });
     </script>
 </html>
