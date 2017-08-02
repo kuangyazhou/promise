@@ -1,0 +1,19 @@
+<html>
+    <head></head>
+    <body></body>
+    <script>
+        function runAsync(){
+            var p=new Promise(function(resolve,reject){
+                setTimeout(function() {
+                    console.log("done");
+                    resolve("any");
+                }, 2000);
+            });
+            return p;
+        }
+        runAsync();
+        runAsync().then(function(e){
+            console.log(e);
+        })
+    </script>
+</html>
