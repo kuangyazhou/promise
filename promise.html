@@ -1,22 +1,77 @@
 <html>
-    <head></head>
-    <body></body>
-    <script>
-        function runAsync(){
-            var p=new Promise(function(resolve,reject){
-                setTimeout(function() {
-                    console.log("done");
-                    resolve("any");
-                    reject("fuck the king");
-                }, 2000);
-            });
-            return p;
-        }
-        runAsync();
-        runAsync().then(function(e){
-            console.log(e);
-        }).catch(function(err){
-            console.log(err);
+
+<head></head>
+
+<body></body>
+<script>
+    function runAsync() {
+        var p = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                console.log("done");
+                // resolve("any");
+                reject("fuck the king");
+            }, 2000);
         });
-    </script>
+        return p;
+    };
+    function runAsync1() {
+        var p = new Promise(function (resolve, reject) {
+            //做一些异步操作
+            setTimeout(function () {
+                console.log('异步任务1执行完成');
+                resolve('随便什么数据1');
+            }, 1000);
+        });
+        return p;
+    };
+    function runAsync2() {
+        var p = new Promise(function (resolve, reject) {
+            //做一些异步操作
+            setTimeout(function () {
+                console.log('异步任务2执行完成');
+                resolve('随便什么数据2');
+            }, 2000);
+        });
+        return p;
+    };
+    function runAsync3() {
+        var p = new Promise(function (resolve, reject) {
+            //做一些异步操作
+            setTimeout(function () {
+                console.log('异步任务3执行完成');
+                resolve('随便什么数据3');
+            }, 3000);
+        });
+        return p;
+    }
+    //promise对象，回调函数中置状态为reject;
+    // runAsync();
+    //then，接收的参数为resolve的返回结果
+    //catch，接收的参数为reject的返回
+    runAsync().then(function (e) {
+        console.log(e);
+    }).catch(function (err) {
+        console.log(err);
+    });
+
+    runAsync1()
+        .then(function (data) {
+            console.log(data);
+            return runAsync2();
+        })
+        .then(function (data) {
+            console.log(data);
+            return runAsync3();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+
+    //promise.all，接收一个数组参数，里面的值都返回promise对象;里面的异步操作并行执行，等所有都执行完后进入then,异步操作的返回结果放入一个数组中，作为then的参数; 
+    Promise.all([runAsync1(),runAsync2(),runAsync3()])
+    .then(function(results){
+        console.log(results);
+    })
+</script>
+
 </html>
