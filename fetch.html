@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>fetch</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    window.onload = function() {
+        console.log('init');
+        fetch('https://cas.hemiao:8443/cas/v1/tickets', {
+                method: 'post',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                // body: 'username=zhangjh&password=123',
+                body: JSON.stringify({
+                    username: 'zhangjh',
+                    password: '123'
+                })
+            }).then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log('error', e))
+            // then(function(res) {
+            //     console.log(res.json());
+            // }).then(function(data) {
+            //     console.log(data);
+            // })
+            // .catch(function(err) {
+            //     console.log(`err is ${err}`);
+            // })
+    }
+</script>
+
+</html>
