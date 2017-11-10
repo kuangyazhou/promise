@@ -83,4 +83,9 @@ Promise.resolve().then(() => { console.log('then'); })
 
 setImmediate(() => { console.log('setImmediate') })
 console.log('end');
+
 //process.nextTick和promise.then都属于microtasks，而setImmediate属于macrotasks，在事件循环的check阶段执行。事件循环的每个阶段(macrotasks)之间都会执行microtasks，事件循环的开始会先执行一次microtasks。
+
+//nextTick 在下次DOM更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的DOM
+
+//nextTick的执行优先级要高于setImmediate();
